@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 配置bean -->
+	<!-- id:唯一标识; class:类的全类名；name2：类里面的set方法，去掉set，首字母小写 -->
+	<bean id="person" class="com.atlunk.spring.bean1.Person">
+		<property name="name2" value="spring"></property>
+	</bean>
+</beans>
