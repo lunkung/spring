@@ -9,7 +9,6 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 //把这个类加入到IOC容器中去，然后在声明该类为一个切面
-
 @Aspect
 @Component
 public class LoggingAspect {
