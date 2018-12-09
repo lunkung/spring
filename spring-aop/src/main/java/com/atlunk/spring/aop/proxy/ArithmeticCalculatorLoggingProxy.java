@@ -31,12 +31,18 @@ public class ArithmeticCalculatorLoggingProxy {
 			public Object invoke(Object proxy, Method method, Object[] args) 
 					throws Throwable {
 				String methodName = method.getName();
-				//日志
-				System.out.println("The method " + methodName + "begins with " + Arrays.asList(args));
-				//执行方法
-				Object result = method.invoke(target, args);
-				//日志
-				System.out.println("The method " + methodName + "end with " + result);
+				Object result = null;
+				try {
+					//前置通知
+					result = method.invoke(target, args);
+					//返回通知通知
+				}catch(Exception e) {
+					e.printStackTrace();
+					//异常通知
+				}
+				//后置同志
+				
+				
 				return result;
 			}
 		};

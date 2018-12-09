@@ -1,8 +1,8 @@
-package com.atlunk.spring.aop.xml.impl;
+package com.atlunk.spring.aop.annotation.impl;
 
 import org.springframework.stereotype.Component;
 
-import com.atlunk.spring.aop.xml.ArithmeticCalculator;
+import com.atlunk.spring.aop.annotation.ArithmeticCalculator;
 
 @Component("ArithmeticCalculator")
 public class ArithmeticCalculatorImpl implements ArithmeticCalculator{

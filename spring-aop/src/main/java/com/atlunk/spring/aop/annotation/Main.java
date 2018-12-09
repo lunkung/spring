@@ -1,4 +1,4 @@
-package com.atlunk.spring.aop.xml;
+package com.atlunk.spring.aop.annotation;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -6,14 +6,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 	
 	public static void main(String args[]){
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-aop.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-aop-annotation.xml");
 		ArithmeticCalculator arithmeticCalculator = (ArithmeticCalculator) ctx.getBean("ArithmeticCalculator");
+
+		int result = 0;
 		
-		int result = arithmeticCalculator.add(3, 6);
-		System.out.println("result=" +result);
+		//result = arithmeticCalculator.add(3, 6);
+		//System.out.println("result=" +result);
 		
 		result = arithmeticCalculator.div(12, 6);
-		System.out.println("result=" +result);
+		//System.out.println("result=" +result);
 		
 	}
 }	

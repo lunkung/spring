@@ -1,4 +1,4 @@
-package com.atlunk.spring.aop.xml;
+package com.atlunk.spring.aop.annotation;
 
 public interface ArithmeticCalculator {
 	//¼Ó¼õ³Ë³ý
