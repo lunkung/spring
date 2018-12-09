@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Order(1)
 @Aspect
 @Component
-public class validationAspect {
+public class ValidationAspect {
 	
 	//@Before("execution(* com.atlunk.spring.aop.annotation.impl.*.*(..))")
 	@Before("LoggingAspect.declarJoinPoint()")
