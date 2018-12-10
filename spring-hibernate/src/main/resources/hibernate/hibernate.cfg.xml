@@ -12,6 +12,8 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- Hibernate默认是使用jdbc方式来取的，如果使用连接池的方式的话，必须告诉Hibernate一声，让它不使用单纯的JDBC连接 -->
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>  
 		
 		<!-- 配置hibernate二級緩存相关 -->
 	</session-factory>

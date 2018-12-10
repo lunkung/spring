@@ -2,8 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- 配置数据源 -->
 	<!-- 导入资源文件 -->
@@ -21,6 +25,7 @@
 	</bean>
 
 	<!-- 配置 hibernate的sessionFactory 实例：通过spring提供的localSessFactoryBean进行配置 -->
+	<!-- 为了让你的hibernate能够连接上数据库 -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<!-- 配置数据源 -->
@@ -34,5 +39,27 @@
 	</bean>
 
 	<!-- 配置spring的声明式事务 -->
-
+	<!--1  配置事务管理器，需要注入sessionFactory -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!--2  配置事务属性，需要事务管理器 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 如果是get请求，一般是查询，表示你现在正在操作的是一个只读事务 -->
+			<tx:method name="get" read-only="true"/>
+			<!-- 其他方法选择默认 -->
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!--3 配置事物切点（AOP），并把切点和事物关联起来 -->
+	<aop:config>
+		<!-- 声明事物的切点表达式： 当前包下，任意子包，任意修饰方法，任意参数-->
+		<aop:pointcut expression="execution(* com.atlunk.spring.hibernate.service.*.*(..))" 
+			id="txPoinCut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPoinCut"/>
+	</aop:config>
+	
 </beans>

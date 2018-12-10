@@ -1,4 +1,4 @@
-package com.atlunk.spring.hibernate.test;
+package com.atlunk.spring.hibernate;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
