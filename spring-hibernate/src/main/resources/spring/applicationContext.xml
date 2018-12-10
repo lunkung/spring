@@ -9,6 +9,9 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+	<!-- 配置自动扫描的包 -->
+	<context:component-scan base-package="com.atlunk.spring"/>
+	
 	<!-- 配置数据源 -->
 	<!-- 导入资源文件 -->
 	<context:property-placeholder
@@ -49,6 +52,8 @@
 		<tx:attributes>
 			<!-- 如果是get请求，一般是查询，表示你现在正在操作的是一个只读事务 -->
 			<tx:method name="get" read-only="true"/>
+			<!-- 配置事务的传播行为，会new一个事务2，当事务1调用一个事务2的时候，事务1会先挂起，执行事务2，事务2执行成功，在执行事务1 -->
+			<tx:method name="purchase" propagation="REQUIRES_NEW"/>
 			<!-- 其他方法选择默认 -->
 			<tx:method name="*"/>
 		</tx:attributes>
